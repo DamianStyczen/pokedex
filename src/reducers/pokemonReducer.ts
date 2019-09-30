@@ -1,4 +1,4 @@
-import { FETCH_POSTS, NEW_POST } from './../actions/types';
+import { FETCH_POKEMONS } from '../actions/types';
 
 
 const initialState = {
@@ -8,10 +8,10 @@ const initialState = {
 
 export default function (state = initialState, action: any) {
     switch (action.type) {
-        case FETCH_POSTS:
+        case FETCH_POKEMONS:
             return {
                 ...state,
-                items: action.payload
+                items: action.payload.results
             }
         default:
             return state;

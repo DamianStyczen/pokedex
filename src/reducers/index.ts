@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
-
-const postReducer = () => null;
+import pokemonReducer from './pokemonReducer';
 
 export default combineReducers({
-    posts: postReducer
+    pokemon: pokemonReducer
 });

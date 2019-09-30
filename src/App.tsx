@@ -6,9 +6,7 @@ import { Provider } from 'react-redux';
 import GlobalStylesProvider from './components/global-styles-provider/global-styles-provider';
 import theme from './styles/theme';
 import HomePage from './pages/home/home';
-import { createStore, applyMiddleware } from 'redux';
-
-const store = createStore(() => [], {}, applyMiddleware());
+import store from './store';
 
 const App: React.FC = () => {
   return (
