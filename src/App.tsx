@@ -8,6 +8,17 @@ import theme from './styles/theme';
 import HomePage from './pages/home/home';
 import store from './store';
 
+const StyledHero = styled.header`
+  display: flex;
+  align-items: center;
+  height: 200px;
+`;
+
+const StyledHeader = styled.h1`
+  text-align: center;
+  width: 100%;
+`;
+
 const App: React.FC = () => {
   return (
     <Provider store={store}>
@@ -15,7 +26,9 @@ const App: React.FC = () => {
         <GlobalStylesProvider />
         <ThemeProvider theme={theme}>
           <>
-            <h1>Hello</h1>
+            <StyledHero>
+              <StyledHeader>Pokedex</StyledHeader>
+            </StyledHero>
             <Switch>
               <Route path='/' exact>
                 <HomePage />

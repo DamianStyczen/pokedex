@@ -2,12 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import List from '../../containers/list';
 
+const StyledMain = styled.main`
+    width: 100%;
+    display: flex;
+`;
 const HomePage: React.FC = () => {
     return (
         <div>
-            <h2>Home</h2>
-            <div>Home content</div>
-            <List />
+            <StyledMain>
+                <List />
+            </StyledMain>
         </div>
     );
 }
