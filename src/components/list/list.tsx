@@ -30,9 +30,14 @@ class List extends React.Component<ListProps> {
 
     render() {
         const { data } = this.props;
-        const output = data && data.map((item, i) => (
-            <StyledListItem key={i}>{item.name}</StyledListItem>
-        ))
+        const output = data && data.map((item, i) => {
+            return (
+                <StyledListItem key={i}>
+                    {item.sprites && <img src={item.sprites.front_default} alt={item.name} />}
+                    {item.name}
+                </StyledListItem>
+            );
+        })
 
         return (
             <div>
