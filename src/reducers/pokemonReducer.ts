@@ -1,4 +1,4 @@
-import { FETCH_POKEMONS } from '../actions/types';
+import { FETCH_POKEMON_LIST, FETCH_POKEMON_DETAILS } from '../actions/types';
 
 
 const initialState = {
@@ -8,7 +8,7 @@ const initialState = {
 
 export default function (state = initialState, action: any) {
     switch (action.type) {
-        case FETCH_POKEMONS:
+        case FETCH_POKEMON_LIST:
             return {
                 ...state,
                 items: action.payload.results
