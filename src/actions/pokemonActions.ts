@@ -1,6 +1,6 @@
 import { FETCH_POKEMON_LIST, FETCH_POKEMON_DETAILS } from './types';
 
-export const fetchPokemon = () => (dispatch: any) => {
+export const fetchPokemon = (isCached: boolean) => (dispatch: any) => {
     fetch('https://pokeapi.co/api/v2/pokemon')
         .then(res => res.json())
         .then(({ results }) => {
@@ -22,7 +22,7 @@ export const fetchPokemon = () => (dispatch: any) => {
         });
 }
 
-const saveDataToLocalStorage = (data: any) => {
-    // window.localStorage.setItem('state')
-    console.log('Hello');
-}
+// const saveDataToLocalStorage = (data: any) => {
+//     // window.localStorage.setItem('state')
+//     console.log('Hello');
+// }

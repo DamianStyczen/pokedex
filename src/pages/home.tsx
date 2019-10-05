@@ -4,6 +4,7 @@ import List from '../components/list';
 
 interface HomePageProps {
     data: Array<any>;
+    dataCached: boolean;
     fetchPokemon: any;
 }
 
@@ -14,7 +15,8 @@ const StyledMain = styled.main`
 
 class HomePage extends React.Component<HomePageProps> {
     componentDidMount() {
-        this.props.fetchPokemon();
+        const { fetchPokemon, dataCached } = this.props;
+        fetchPokemon(dataCached);
     }
 
     render() {
