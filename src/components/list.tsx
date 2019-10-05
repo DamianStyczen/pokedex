@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Pokemon from '../types/pokemon';
 
 interface ListProps {
-    data: Array<any>
+    data: Array<Pokemon>
 }
 
 const StyledList = styled.ol`

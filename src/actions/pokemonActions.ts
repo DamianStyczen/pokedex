@@ -38,7 +38,7 @@ export const fetchPokemon = () => (dispatch: any) => {
 }
 
 const fetchDetails = (
-    results: Array<any>,
+    results: Array<Pokemon>,
     pokemon: Pokemon,
     index: number
 ): Promise<Response> => fetch(pokemon.url)
