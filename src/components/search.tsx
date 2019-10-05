@@ -1,5 +1,6 @@
 import React, { FormEvent, useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
+import { Redirect } from 'react-router';
 
 interface SearchProps {
     searchStart: any;
@@ -33,7 +34,21 @@ class Search extends React.Component<SearchProps, SearchState> {
     }
 
     render() {
-        const { query } = this.state;
+        const { query, previousStatus } = this.state;
+        const { status } = this.props;
+
+        if (previousStatus === 'PROGRESS' && status === 'SUCCESS') {
+            return (<Redirect to={`/search/${query}`} />);
+        }
+
+        if (status !== previousStatus) {
+            // TODO: DONT SET STATE HERE
+            // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
+            this.setState({
+                previousStatus: status
+            });
+        }
+
         return (
             <form onSubmit={this.handleSubmit}>
                 <input

@@ -24,8 +24,6 @@ const StyledLink = styled(Link)`
 const DetailsPage = (props: DetailsPageProps) => {
     const { data } = props;
 
-    console.log(data);
-
     if (!data) {
         return (
             <h1>No data</h1>

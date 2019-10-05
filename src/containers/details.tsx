@@ -7,7 +7,7 @@ const mapStateToProps = (state: any, props: any) => {
     const query = get(props, 'match.params.query');
 
     const data = query
-        ? get(state, `pokemon.search[${query}]`, {})
+        ? get(state, `search.data`, {})
         : get(state, `pokemon.list[${id}]`, {});
 
     return ({ data });

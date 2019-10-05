@@ -3,7 +3,6 @@ import { get, set } from 'lodash';
 export const getDataFromLocalStorage = (path?: string) => {
     const localData: string | null = window.localStorage.getItem('state');
     const parsedData: object = localData && JSON.parse(localData);
-    console.log({ parsedData });
 
     return path ? get(parsedData, path, null) : parsedData;
 }
