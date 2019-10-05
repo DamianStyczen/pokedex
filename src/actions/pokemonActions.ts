@@ -21,3 +21,8 @@ export const fetchPokemon = () => (dispatch: any) => {
             });
         });
 }
+
+const saveDataToLocalStorage = (data: any) => {
+    // window.localStorage.setItem('state')
+    console.log('Hello');
+}
