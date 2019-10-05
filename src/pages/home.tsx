@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import List from '../components/list';
 import Pokemon from '../types/pokemon';
 import LoadMoreButton from '../containers/load-more-button';
+import Navbar from '../containers/navbar';
 
 interface HomePageProps {
     data: Array<Pokemon>;
@@ -39,6 +40,7 @@ class HomePage extends React.Component<HomePageProps> {
                 <StyledHero>
                     <StyledHeader>Pokedex</StyledHeader>
                 </StyledHero>
+                <Navbar />
                 <StyledMain>
                     <List data={this.props.data} />
                     <LoadMoreButton />
