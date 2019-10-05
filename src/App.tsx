@@ -1,7 +1,6 @@
 import React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-// @ts-ignore
 import { Provider } from 'react-redux';
 
 import GlobalStylesProvider from './components/global-styles-provider';
