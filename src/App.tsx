@@ -18,6 +18,7 @@ const App: React.FC = () => {
           <Switch>
             <Route path='/' exact component={HomePage} />
             <Route path='/details/:id' component={DetailsPage} />
+            <Route path='/search/:query' component={DetailsPage} />
           </Switch>
         </ThemeProvider>
       </Router>

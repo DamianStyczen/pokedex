@@ -6,19 +6,29 @@ import Pokemon from './types/pokemon';
 
 export interface PokemonState {
     list: Array<Pokemon>;
-    search: any;
     nextUrl: string;
+}
+
+export interface SearchState {
+    query: string;
+    data: Pokemon,
+    status: string;
 }
 
 export interface State {
     pokemon: PokemonState;
+    search: SearchState;
 }
 
 const initialState: State = {
     pokemon: {
         list: [],
-        search: {},
         nextUrl: ''
+    },
+    search: {
+        query: '',
+        data: {} as Pokemon,
+        status
     }
 };
 

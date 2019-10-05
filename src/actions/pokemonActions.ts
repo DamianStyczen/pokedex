@@ -3,8 +3,7 @@ import {
     saveDataToLocalStorage
 } from './../utils/local-storage';
 import {
-    FETCH_POKEMON_LIST,
-    SEARCH_FOR_POKEMON
+    FETCH_POKEMON_LIST
 } from './types';
 import Pokemon from '../types/pokemon';
 import { Dispatch } from 'redux';
@@ -47,21 +46,6 @@ export const fetchPokemon = (nextUrl?: string) => (dispatch: Dispatch) => {
                     })
                 })
         });
-}
-
-export const searchForPokemon = (query: string) => (dispatch: Dispatch) => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${query}`)
-        .then(res => res.json())
-        .then((data) => {
-            dispatch({
-                type: SEARCH_FOR_POKEMON,
-                data,
-                query
-            })
-        })
-        .catch(error => {
-            console.error(error);
-        })
 }
 
 const fetchDetails = (
