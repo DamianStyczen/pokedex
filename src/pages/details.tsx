@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import Pokemon from '../types/Pokemon';
 
 interface DetailsPageProps {
-    data: any;
+    data: Pokemon;
 }
 
 const StyledWrapper = styled.div`
@@ -29,7 +30,7 @@ const DetailsPage = (props: DetailsPageProps) => {
 
     return (
         <StyledWrapper>
-            <StyledImage src={data.sprites.front_default} alt={data.name} />
+            {data.sprites && <StyledImage src={data.sprites.front_default} alt={data.name} />}
             <h1>{data.name}</h1>
         </StyledWrapper>
     )
