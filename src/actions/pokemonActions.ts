@@ -31,11 +31,16 @@ export const fetchPokemon = (nextUrl?: string) => (dispatch: any) => {
                     const allData = cachedData
                         ? [...cachedData, ...results]
                         : results;
-                    saveDataToLocalStorage('pokemon.list', allData);
-                    saveDataToLocalStorage('pokemon.nextUrl', next);
+
+                    try {
+                        saveDataToLocalStorage('pokemon.list', allData);
+                        saveDataToLocalStorage('pokemon.nextUrl', next);
+                    } catch (e) {
+                        console.error('Failed to cache data', e);
+                    }
                     dispatch({
                         type: FETCH_POKEMON_LIST,
-                        list: allData,
+                        list: results,
                         nextUrl: next
                     })
                 })
