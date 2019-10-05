@@ -28,10 +28,14 @@ export const fetchPokemon = (nextUrl?: string) => (dispatch: any) => {
 
             Promise.all(allDetailsFetches)
                 .then(() => {
-                    saveDataToLocalStorage('pokemon.list', results);
+                    const allData = cachedData
+                        ? [...cachedData, ...results]
+                        : results;
+                    saveDataToLocalStorage('pokemon.list', allData);
+                    saveDataToLocalStorage('pokemon.nextUrl', next);
                     dispatch({
                         type: FETCH_POKEMON_LIST,
-                        list: results,
+                        list: allData,
                         nextUrl: next
                     })
                 })

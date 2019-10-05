@@ -37,7 +37,7 @@ const List = (props: ListProps) => {
             <StyledListItem key={i}>
                 <StyledLink to={`/details/${i}`} >
                     {item.sprites && <img src={item.sprites.front_default} alt={item.name} />}
-                    {item.name}
+                    {item.id}. {item.name}
                 </StyledLink>
             </StyledListItem>
         );

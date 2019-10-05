@@ -1,9 +1,11 @@
+import { PokemonState } from './../store';
 import {
     FETCH_POKEMON_LIST
 } from '../actions/types';
 
-const initialState = {
-    list: []
+const initialState: PokemonState = {
+    list: [],
+    nextUrl: ''
 }
 
 export default function (state = initialState, action: any) {
