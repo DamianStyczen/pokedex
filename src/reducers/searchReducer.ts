@@ -1,14 +1,15 @@
-import { PokemonState } from './../store';
+import { SearchState } from './../store';
 import {
     SEARCH_START,
     SEARCH_SUCCESS,
     SEARCH_ERROR
 } from '../actions/types';
+import Pokemon from '../types/pokemon';
 
-const initialState: PokemonState = {
-    list: [],
-    search: {},
-    nextUrl: ''
+const initialState: SearchState = {
+    query: '',
+    data: {} as Pokemon,
+    status: ''
 }
 
 export default function (state = initialState, action: any) {

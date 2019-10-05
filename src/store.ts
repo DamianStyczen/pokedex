@@ -11,7 +11,7 @@ export interface PokemonState {
 
 export interface SearchState {
     query: string;
-    data: Pokemon,
+    data: Pokemon;
     status: string;
 }
 
@@ -28,7 +28,7 @@ const initialState: State = {
     search: {
         query: '',
         data: {} as Pokemon,
-        status
+        status: ''
     }
 };
 
