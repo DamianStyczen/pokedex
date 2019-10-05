@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 
 import GlobalStylesProvider from './components/global-styles-provider';
 import theme from './styles/theme';
-import HomePage from './pages/home/home';
+import HomePage from './containers/home';
 import store from './store';
 
 const StyledHero = styled.header`

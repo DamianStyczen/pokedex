@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface ListProps {
-    data: Array<any>,
-    fetchPokemon: any
+    data: Array<any>
 }
 
 const StyledList = styled.ol`
@@ -23,31 +22,25 @@ const StyledListItem = styled.li`
     text-transform: capitalize;
 `;
 
-class List extends React.Component<ListProps> {
-    componentDidMount() {
-        this.props.fetchPokemon();
-    }
-
-    render() {
-        const { data } = this.props;
-        const output = data && data.map((item, i) => {
-            return (
-                <StyledListItem key={i}>
-                    {item.sprites && <img src={item.sprites.front_default} alt={item.name} />}
-                    {item.name}
-                </StyledListItem>
-            );
-        })
-
+const List = (props: ListProps) => {
+    const { data } = props;
+    const output = data && data.map((item, i) => {
         return (
-            <div>
-                <StyledList>
-                    {output}
-                </StyledList>
-
-            </div>
+            <StyledListItem key={i}>
+                {item.sprites && <img src={item.sprites.front_default} alt={item.name} />}
+                {item.name}
+            </StyledListItem>
         );
-    }
+    })
+
+    return (
+        <div>
+            <StyledList>
+                {output}
+            </StyledList>
+
+        </div>
+    );
 }
 
 export default List;
