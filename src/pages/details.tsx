@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Pokemon from '../types/pokemon';
+import { Link } from 'react-router-dom';
 
 interface DetailsPageProps {
     data: Pokemon;
@@ -17,6 +18,9 @@ const StyledImage = styled.img`
     height: 384px;
 `;
 
+const StyledLink = styled(Link)`
+`;
+
 const DetailsPage = (props: DetailsPageProps) => {
     const { data } = props;
 
@@ -30,6 +34,7 @@ const DetailsPage = (props: DetailsPageProps) => {
 
     return (
         <StyledWrapper>
+            <StyledLink to='/' >Go back</StyledLink>
             {data.sprites && <StyledImage src={data.sprites.front_default} alt={data.name} />}
             <h1>{data.name}</h1>
         </StyledWrapper>

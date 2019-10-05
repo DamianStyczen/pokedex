@@ -7,21 +7,21 @@ import {
 } from './types';
 import Pokemon from '../types/pokemon';
 
-export const fetchPokemon = () => (dispatch: any) => {
+export const fetchPokemon = (nextUrl?: string) => (dispatch: any) => {
     const cachedData = getDataFromLocalStorage('pokemon.list');
 
-    if (cachedData) {
+    if (!nextUrl && cachedData) {
         dispatch({
             type: FETCH_POKEMON_LIST,
-            payload: cachedData
+            list: cachedData
         })
 
         return;
     }
 
-    fetch('https://pokeapi.co/api/v2/pokemon')
+    fetch(nextUrl || 'https://pokeapi.co/api/v2/pokemon')
         .then(res => res.json())
-        .then(({ results }) => {
+        .then(({ results, next }) => {
             const allDetailsFetches = results.map(
                 (pokemon: Pokemon, index: number) => fetchDetails(results, pokemon, index)
             );
@@ -31,7 +31,8 @@ export const fetchPokemon = () => (dispatch: any) => {
                     saveDataToLocalStorage('pokemon.list', results);
                     dispatch({
                         type: FETCH_POKEMON_LIST,
-                        payload: results
+                        list: results,
+                        nextUrl: next
                     })
                 })
         });

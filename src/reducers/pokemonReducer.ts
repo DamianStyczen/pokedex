@@ -11,7 +11,8 @@ export default function (state = initialState, action: any) {
         case FETCH_POKEMON_LIST:
             return {
                 ...state,
-                list: action.payload
+                list: action.list,
+                nextUrl: action.nextUrl
             }
         default:
             return state;

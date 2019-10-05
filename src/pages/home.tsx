@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import List from '../components/list';
 import Pokemon from '../types/pokemon';
+import LoadMoreButton from '../containers/load-more-button';
 
 interface HomePageProps {
     data: Array<Pokemon>;
@@ -20,8 +21,10 @@ const StyledHeader = styled.h1`
 `;
 
 const StyledMain = styled.main`
-    width: 100%;
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
 `;
 
 class HomePage extends React.Component<HomePageProps> {
@@ -38,6 +41,7 @@ class HomePage extends React.Component<HomePageProps> {
                 </StyledHero>
                 <StyledMain>
                     <List data={this.props.data} />
+                    <LoadMoreButton />
                 </StyledMain>
             </div>
         );
