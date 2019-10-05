@@ -1,28 +1,45 @@
-import { FETCH_POKEMON_LIST, FETCH_POKEMON_DETAILS } from './types';
+import {
+    getDataFromLocalStorage,
+    saveDataToLocalStorage
+} from './../utils/local-storage';
+import {
+    FETCH_POKEMON_LIST
+} from './types';
 
-export const fetchPokemon = (isCached: boolean) => (dispatch: any) => {
+export const fetchPokemon = () => (dispatch: any) => {
+    const cachedData = getDataFromLocalStorage('pokemon.list');
+
+    if (cachedData) {
+        dispatch({
+            type: FETCH_POKEMON_LIST,
+            payload: cachedData
+        })
+
+        return;
+    }
+
     fetch('https://pokeapi.co/api/v2/pokemon')
         .then(res => res.json())
         .then(({ results }) => {
+            const allDetailsFetches = results.map(
+                (pokemon: any, index: number) => fetchDetails(results, pokemon, index)
+            );
 
-            dispatch({
-                type: FETCH_POKEMON_LIST,
-                payload: results
-            });
-
-            results.forEach((pokemon: any, index: number) => {
-                fetch(pokemon.url)
-                    .then(res => res.json())
-                    .then(details => dispatch({
-                        type: FETCH_POKEMON_DETAILS,
-                        payload: details,
-                        index
-                    }))
-            });
+            Promise.all(allDetailsFetches)
+                .then(() => {
+                    saveDataToLocalStorage('pokemon.list', results);
+                    dispatch({
+                        type: FETCH_POKEMON_LIST,
+                        payload: results
+                    })
+                })
         });
 }
 
-// const saveDataToLocalStorage = (data: any) => {
-//     // window.localStorage.setItem('state')
-//     console.log('Hello');
-// }
+const fetchDetails = (
+    results: Array<any>,
+    pokemon: any,
+    index: number
+): Promise<Response> => fetch(pokemon.url)
+    .then(res => res.json())
+    .then(details => results[index] = details) 
