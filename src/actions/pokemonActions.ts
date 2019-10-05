@@ -5,6 +5,7 @@ import {
 import {
     FETCH_POKEMON_LIST
 } from './types';
+import Pokemon from '../types/pokemon';
 
 export const fetchPokemon = () => (dispatch: any) => {
     const cachedData = getDataFromLocalStorage('pokemon.list');
@@ -22,7 +23,7 @@ export const fetchPokemon = () => (dispatch: any) => {
         .then(res => res.json())
         .then(({ results }) => {
             const allDetailsFetches = results.map(
-                (pokemon: any, index: number) => fetchDetails(results, pokemon, index)
+                (pokemon: Pokemon, index: number) => fetchDetails(results, pokemon, index)
             );
 
             Promise.all(allDetailsFetches)
@@ -38,7 +39,7 @@ export const fetchPokemon = () => (dispatch: any) => {
 
 const fetchDetails = (
     results: Array<any>,
-    pokemon: any,
+    pokemon: Pokemon,
     index: number
 ): Promise<Response> => fetch(pokemon.url)
     .then(res => res.json())

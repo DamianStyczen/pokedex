@@ -1,5 +1,6 @@
 export default interface Pokemon {
     name: string;
+    url: string;
     abilities?: Array<any>;
     base_experience?: number;
     forms?: Array<any>;

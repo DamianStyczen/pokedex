@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Pokemon from '../types/Pokemon';
+import Pokemon from '../types/pokemon';
 
 interface DetailsPageProps {
     data: Pokemon;
