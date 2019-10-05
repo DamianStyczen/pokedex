@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import GlobalStylesProvider from './components/global-styles-provider';
 import theme from './styles/theme';
 import HomePage from './containers/home';
+import DetailsPage from './containers/details';
 import store from './store';
 
 const StyledHero = styled.header`
@@ -31,12 +32,8 @@ const App: React.FC = () => {
               <StyledHeader>Pokedex</StyledHeader>
             </StyledHero>
             <Switch>
-              <Route path='/' exact>
-                <HomePage />
-              </Route>
-              <Route path='/details' >
-                <h2>Details</h2>
-              </Route>
+              <Route path='/' exact component={HomePage} />
+              <Route path='/details/:id' component={DetailsPage} />
             </Switch>
           </>
         </ThemeProvider>

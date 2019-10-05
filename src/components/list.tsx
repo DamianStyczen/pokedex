@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 interface ListProps {
     data: Array<any>
@@ -22,13 +23,21 @@ const StyledListItem = styled.li`
     text-transform: capitalize;
 `;
 
+const StyledLink = styled(Link)`
+    display: block;
+    width: 100%;
+    height: 100%;
+`;
+
 const List = (props: ListProps) => {
     const { data } = props;
     const output = data && data.map((item, i) => {
         return (
             <StyledListItem key={i}>
-                {item.sprites && <img src={item.sprites.front_default} alt={item.name} />}
-                {item.name}
+                <StyledLink to={`/details/${i}`} >
+                    {item.sprites && <img src={item.sprites.front_default} alt={item.name} />}
+                    {item.name}
+                </StyledLink>
             </StyledListItem>
         );
     })

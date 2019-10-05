@@ -5,8 +5,7 @@ import { fetchPokemon } from '../actions/pokemonActions';
 import { get } from 'lodash';
 
 const mapStateToProps = (state: any) => ({
-    data: get(state, 'pokemon.list', []),
-    dataCached: get(state, 'pokemon.dataCached', false)
+    data: get(state, 'pokemon.list', [])
 })
 
 export default connect(mapStateToProps, { fetchPokemon })(Home); 
