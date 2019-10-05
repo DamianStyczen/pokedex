@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import List from '../components/list';
-import { fetchPokemon } from '../actions/pokemonActions';
 
 interface HomePageProps {
     data: Array<any>;
