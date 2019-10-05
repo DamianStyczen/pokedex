@@ -53,7 +53,11 @@ export const searchForPokemon = (query: string) => (dispatch: Dispatch) => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${query}`)
         .then(res => res.json())
         .then((data) => {
-            console.log({ data });
+            dispatch({
+                type: SEARCH_FOR_POKEMON,
+                data,
+                query
+            })
         })
         .catch(error => {
             console.error(error);
