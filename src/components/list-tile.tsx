@@ -23,7 +23,7 @@ const Background = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 0;
 `;
 
 const NameTag = styled.div`
@@ -45,6 +45,7 @@ const NameSpan = styled.span`
 
 const Image = styled.img`
     margin-bottom: 10px;
+    z-index: 1;
 `;
 
 interface BackgroundTileProps {

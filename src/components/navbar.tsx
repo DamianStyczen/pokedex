@@ -10,13 +10,16 @@ interface NavbarProps {
     goBack?: boolean;
 }
 
+interface NavProps {
+    theme: any;
+}
 const Nav = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 50px;
-    background: lightblue;
+    background: ${({ theme }: NavProps) => theme.colors.primary};
     padding: 0 20px;
 `;
 

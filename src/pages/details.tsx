@@ -11,6 +11,7 @@ const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: ${({ theme }: any) => theme.colors.white};
 `;
 
 const StyledHeader = styled.h1`

@@ -33,6 +33,7 @@ const StyledHero = styled.header`
   align-items: center;
   flex-direction: column;
   height: 200px;
+  background: ${({ theme }: any) => theme.colors.secondary};
 `;
 
 const StyledHeader = styled.h1`
@@ -50,6 +51,7 @@ const StyledMain = styled.main`
     justify-content: center;
     flex-wrap: wrap;
     width: 100%;
+    background: ${({ theme }: any) => theme.colors.white};
 `;
 
 class HomePage extends React.Component<HomePageProps> {
