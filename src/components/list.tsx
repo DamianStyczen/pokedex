@@ -16,6 +16,7 @@ const StyledList = styled.ol`
     flex-wrap: wrap;
     width: 100vw;
     justify-content: center;
+    margin-top: 5px;
 `;
 
 interface StyledListItemProps {

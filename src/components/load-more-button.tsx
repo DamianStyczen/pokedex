@@ -1,16 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import Button from './button';
 
 interface LoadMoreButtonProps {
     nextUrl: string;
     fetchPokemon: any;
 }
 
-const StyledButton = styled.button`
-    width: 200px;
-    height: 50px;
-    border-radius: 20px;
-    background: red;
+const StyledButton = styled(Button)`
+    margin: 20px;
 `;
 
 const LoadMoreButton = (props: LoadMoreButtonProps) => {

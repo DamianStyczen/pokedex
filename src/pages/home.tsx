@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import List from '../components/list';
 import Pokemon from '../types/pokemon';
 import LoadMoreButton from '../containers/load-more-button';
-import Search from '../containers/search';
-import Filters from '../containers/filters';
+import Navbar from '../components/navbar';
 
 interface HomePageProps {
     data: Array<Pokemon>;
@@ -69,8 +68,7 @@ class HomePage extends React.Component<HomePageProps> {
                 <StyledHero>
                     <StyledHeader>Pokedex</StyledHeader>
                 </StyledHero>
-                <Filters />
-                <Search />
+                <Navbar />
                 <StyledMain>
                     <List data={data} />
                     <LoadMoreButton />

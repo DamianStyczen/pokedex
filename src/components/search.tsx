@@ -1,6 +1,7 @@
-import React, { FormEvent, useState, ChangeEvent } from 'react';
+import React, { FormEvent, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { Redirect } from 'react-router';
+import Button from './button';
 
 interface MessageBoxProps {
     isError: boolean;
@@ -10,6 +11,32 @@ const MessageBox = styled.div`
     position: absolute;
     width: 100%;
     background: ${(props: MessageBoxProps) => props.isError ? 'tomato' : 'lightblue'};
+`;
+
+const Form = styled.form`
+    position: relative;
+    height: 30px;
+    width: 200px;
+    margin-left: 5px;
+
+`;
+
+const Input = styled.input`
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    border: none;
+    text-indent: 5px;
+`;
+
+const InputButton = styled(Button)`
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    height: 20px;
+    width: auto;
+    padding: 0 5px;
+
 `;
 
 interface SearchProps {
@@ -91,16 +118,16 @@ class Search extends React.Component<SearchProps, SearchState> {
         )
 
         return (
-            <form onSubmit={this.handleSubmit}>
-                <input
+            <Form onSubmit={this.handleSubmit}>
+                <Input
                     type="search"
-                    placeholder="Search"
+                    placeholder="Name or id"
                     onChange={this.handleChange}
                     value={query}
                 />
                 {showMessage && messageBox}
-                <button type="submit">Search</button>
-            </form>
+                <InputButton type="submit">Search</InputButton>
+            </Form>
 
         )
     }

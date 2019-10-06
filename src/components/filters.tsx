@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Button from './button';
 
 const StyledListWrapper = styled.div`
     position: fixed;
@@ -24,22 +25,17 @@ const StyledList = styled.ul`
     list-style: none;
 `;
 
-const StyledButton = styled.button`
-    width: 125px;
-    height: 40px;
-    margin: 5px 15px;
-    border-radius: 20px;
-`;
-
 interface StyledFilterButtonProps {
     theme: any;
     pokemonType: string;
 }
 
-const StyledFilterButton = styled(StyledButton)`
+const StyledFilterButton = styled(Button)`
+    margin: 5px 15px;
     background-color: ${({ theme, pokemonType }: StyledFilterButtonProps) => theme.colors[pokemonType]};
 `;
-const NoFiltersButton = styled(StyledButton)`
+const NoFiltersButton = styled(Button)`
+    margin: 5px 15px;
     width: 280px;
     background-color: tomato;
 `;
@@ -114,11 +110,11 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
 
         return (
             <div>
-                <button
+                <Button
                     onClick={this.toggleList}
                 >
                     Filters
-                </button>
+                </Button>
                 {showList && list}
             </div>
         );

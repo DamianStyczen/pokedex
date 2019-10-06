@@ -16,6 +16,8 @@ const Tile = styled.div`
     width: 140px;
     height: 140px;
     margin: 5px;
+    border-radius: 5px;
+    overflow: hidden;
 `;
 
 const Background = styled.div`
