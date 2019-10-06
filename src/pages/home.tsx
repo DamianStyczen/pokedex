@@ -68,7 +68,7 @@ class HomePage extends React.Component<HomePageProps> {
                 <StyledHero>
                     <StyledHeader>Pokedex</StyledHeader>
                 </StyledHero>
-                <Navbar />
+                <Navbar filters search />
                 <StyledMain>
                     <List data={data} />
                     <LoadMoreButton />
