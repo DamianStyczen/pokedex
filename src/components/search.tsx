@@ -33,20 +33,23 @@ class Search extends React.Component<SearchProps, SearchState> {
         searchStart(query);
     }
 
+    componentDidUpdate() {
+        const { status } = this.props;
+        const { previousStatus } = this.state;
+
+        if (status !== previousStatus) {
+            this.setState({
+                previousStatus: status
+            });
+        }
+    }
+
     render() {
         const { query, previousStatus } = this.state;
         const { status } = this.props;
 
         if (previousStatus === 'PROGRESS' && status === 'SUCCESS') {
             return (<Redirect to={`/search/${query}`} />);
-        }
-
-        if (status !== previousStatus) {
-            // TODO: DONT SET STATE HERE
-            // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
-            this.setState({
-                previousStatus: status
-            });
         }
 
         return (
