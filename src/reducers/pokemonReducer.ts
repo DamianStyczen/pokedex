@@ -1,6 +1,7 @@
 import { PokemonState } from './../store';
 import {
-    FETCH_POKEMON_LIST
+    FETCH_POKEMON_LIST,
+    FILTER_POKEMON_LIST
 } from '../actions/types';
 
 const initialState: PokemonState = {
@@ -16,6 +17,12 @@ export default function (state = initialState, action: any) {
                 ...state,
                 list: allData,
                 nextUrl: action.nextUrl
+            }
+        case FILTER_POKEMON_LIST:
+            return {
+                ...state,
+                list: action.list,
+                nextUrl: ''
             }
         default:
             return state;

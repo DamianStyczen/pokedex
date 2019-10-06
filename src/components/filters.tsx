@@ -30,7 +30,13 @@ const StyledListButton = styled.button`
     border-radius: 20px;
 `;
 
+const NoFiltersButton = styled(StyledListButton)`
+    width: 280px;
+    background-color: tomato;
+`;
+
 interface FiltersProps {
+    filterPokemon: any;
     fetchPokemon: any;
 }
 
@@ -87,8 +93,13 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
 
     toggleList = () => this.setState({ showList: !this.state.showList });
 
-    handleFilterClick = (type: string) => {
-        this.props.fetchPokemon(type);
+    handleFilterClick = (type?: string) => {
+        const { fetchPokemon, filterPokemon } = this.props;
+        if (type) {
+            return filterPokemon(type);
+        }
+
+        fetchPokemon();
     }
 
     render() {
@@ -97,6 +108,11 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
         const list = (
             <StyledListWrapper onClick={this.toggleList}>
                 <StyledList>
+                    <li key={'nofilters'}>
+                        <NoFiltersButton onClick={() => this.handleFilterClick()}>
+                            No Filters
+                        </NoFiltersButton>
+                    </li>
                     {types.map(type => (
                         <li key={type}>
                             <StyledListButton data-type={type} onClick={() => this.handleFilterClick(type)}>

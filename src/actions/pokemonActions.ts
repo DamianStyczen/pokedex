@@ -3,23 +3,13 @@ import {
     saveDataToLocalStorage
 } from './../utils/local-storage';
 import {
-    FETCH_POKEMON_LIST
+    FETCH_POKEMON_LIST,
+    FILTER_POKEMON_LIST
 } from './types';
 import Pokemon from '../types/pokemon';
 import { Dispatch } from 'redux';
 
 export const fetchPokemon = (nextUrl?: string) => (dispatch: Dispatch) => {
-    const cachedData = getDataFromLocalStorage('pokemon.list');
-
-    if (!nextUrl && cachedData) {
-        dispatch({
-            type: FETCH_POKEMON_LIST,
-            list: cachedData
-        })
-
-        return;
-    }
-
     fetch(nextUrl || 'https://pokeapi.co/api/v2/pokemon')
         .then(res => res.json())
         .then(({ results, next }) => {
@@ -29,20 +19,30 @@ export const fetchPokemon = (nextUrl?: string) => (dispatch: Dispatch) => {
 
             Promise.all(allDetailsFetches)
                 .then(() => {
-                    const allData = cachedData
-                        ? [...cachedData, ...results]
-                        : results;
-
-                    // try {
-                    //     saveDataToLocalStorage('pokemon.list', allData);
-                    //     saveDataToLocalStorage('pokemon.nextUrl', next);
-                    // } catch (e) {
-                    //     console.error('Failed to cache data', e);
-                    // }
                     dispatch({
                         type: FETCH_POKEMON_LIST,
                         list: results,
                         nextUrl: next
+                    })
+                })
+        });
+}
+
+export const filterPokemon = (filter: string) => (dispatch: Dispatch) => {
+    fetch(`https://pokeapi.co/api/v2/type/${filter}`)
+        .then(res => res.json())
+        .then(({ pokemon: results }) => {
+            console.log({ results });
+            const allDetailsFetches = results.map(
+                (item: any, index: number) => fetchDetails(results, item.pokemon, index)
+            );
+
+            Promise.all(allDetailsFetches)
+                .then(() => {
+                    dispatch({
+                        type: FILTER_POKEMON_LIST,
+                        list: results,
+                        nextUrl: ''
                     })
                 })
         });
