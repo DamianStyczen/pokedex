@@ -34,6 +34,7 @@ const StyledFilterButton = styled(Button)`
     margin: 5px 15px;
     background-color: ${({ theme, pokemonType }: StyledFilterButtonProps) => theme.colors[pokemonType]};
 `;
+
 const NoFiltersButton = styled(Button)`
     margin: 5px 15px;
     width: 280px;
@@ -47,6 +48,7 @@ interface FiltersProps {
 
 interface FiltersState {
     showList: boolean;
+    type: string;
 }
 
 const types: Array<string> = [ // TODO make it into enum
@@ -72,14 +74,19 @@ const types: Array<string> = [ // TODO make it into enum
 
 class Filters extends React.Component<FiltersProps, FiltersState> {
     state = {
-        showList: false
+        showList: false,
+        type: ''
     }
 
-    toggleList = () => this.setState({ showList: !this.state.showList });
+    toggleList = () => this.setState({
+        showList: !this.state.showList
+    });
 
     handleFilterClick = (type?: string) => {
         const { fetchPokemon, filterPokemon } = this.props;
         if (type) {
+            this.setState({ type });
+
             return filterPokemon(type);
         }
 
@@ -87,7 +94,7 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
     }
 
     render() {
-        const { showList } = this.state;
+        const { showList, type } = this.state;
 
         const list = (
             <StyledListWrapper onClick={this.toggleList}>
@@ -110,10 +117,8 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
 
         return (
             <div>
-                <Button
-                    onClick={this.toggleList}
-                >
-                    Filters
+                <Button onClick={this.toggleList}>
+                    {type || 'Filters'}
                 </Button>
                 {showList && list}
             </div>

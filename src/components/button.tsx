@@ -10,6 +10,7 @@ const Button = styled.button`
     height: 30px;
     border-radius: 5px;
     background-color: ${({ backgroundColor, theme }: ButtonProps) => backgroundColor || theme.secondary};
+    text-transform: capitalize;
 `;
 
 export default Button;
