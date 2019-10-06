@@ -3,55 +3,85 @@ import {
     saveDataToLocalStorage
 } from './../utils/local-storage';
 import {
-    FETCH_POKEMON_LIST,
-    FILTER_POKEMON_LIST
+    FETCH_POKEMON_LIST_START,
+    FETCH_POKEMON_LIST_SUCCESS,
+    FETCH_POKEMON_LIST_ERROR,
+    FILTER_POKEMON_LIST_START,
+    FILTER_POKEMON_LIST_SUCCESS,
+    FILTER_POKEMON_LIST_ERROR
 } from './types';
 import Pokemon from '../types/pokemon';
 import { Dispatch } from 'redux';
 
-export const fetchPokemon = (nextUrl?: string) => (dispatch: Dispatch) => {
-    fetch(nextUrl || 'https://pokeapi.co/api/v2/pokemon')
-        .then(res => res.json())
-        .then(({ results, next }) => {
-            const allDetailsFetches = results.map(
-                (pokemon: Pokemon, index: number) => fetchDetails(results, pokemon, index)
-            );
+export const fetchPokemon = (nextUrl?: string) => async (dispatch: Dispatch) => {
+    dispatch({
+        type: FETCH_POKEMON_LIST_START
+    });
 
-            Promise.all(allDetailsFetches)
-                .then(() => {
-                    dispatch({
-                        type: FETCH_POKEMON_LIST,
-                        list: results,
-                        nextUrl: next
-                    })
-                })
+    try {
+        const response = await fetch(nextUrl || 'https://pokeapi.co/api/v2/pokemon');
+        const data = await response.json();
+        const { results: list, next } = data;
+
+        const allPromises = list.map(
+            (pokemon: Pokemon, index: number) => fetchDetails(list, pokemon, index)
+        );
+
+        await Promise.all(allPromises);
+
+        dispatch({
+            type: FETCH_POKEMON_LIST_SUCCESS,
+            list,
+            nextUrl: next,
+            isContinuation: !!nextUrl
         });
+
+
+    } catch {
+        dispatch({
+            type: FETCH_POKEMON_LIST_ERROR
+        });
+    }
 }
 
-export const filterPokemon = (filter: string) => (dispatch: Dispatch) => {
-    fetch(`https://pokeapi.co/api/v2/type/${filter}`)
-        .then(res => res.json())
-        .then(({ pokemon: results }) => {
-            console.log({ results });
-            const allDetailsFetches = results.map(
-                (item: any, index: number) => fetchDetails(results, item.pokemon, index)
-            );
+export const filterPokemon = (filter: string) => async (dispatch: Dispatch) => {
+    dispatch({
+        type: FILTER_POKEMON_LIST_START
+    });
 
-            Promise.all(allDetailsFetches)
-                .then(() => {
-                    dispatch({
-                        type: FILTER_POKEMON_LIST,
-                        list: results,
-                        nextUrl: ''
-                    })
-                })
+    try {
+        const response = await fetch(`https://pokeapi.co/api/v2/type/${filter}`);
+        const data = await response.json();
+        const { pokemon } = data;
+        const list = pokemon.map((item: any) => item.pokemon);
+
+        const allPromises = list.map(
+            (pokemon: Pokemon, index: number) => fetchDetails(list, pokemon, index)
+        );
+
+        await Promise.all(allPromises);
+
+        dispatch({
+            type: FILTER_POKEMON_LIST_SUCCESS,
+            list,
+            nextUrl: ''
         });
+
+
+    } catch {
+        dispatch({
+            type: FILTER_POKEMON_LIST_ERROR
+        });
+    }
 }
 
-const fetchDetails = (
-    results: Array<Pokemon>,
+const fetchDetails = async (
+    list: Array<Pokemon>,
     pokemon: Pokemon,
     index: number
-): Promise<Response> => fetch(pokemon.url)
-    .then(res => res.json())
-    .then(details => results[index] = details) 
+): Promise<Response> => {
+    const response = await fetch(pokemon.url);
+    const details = await response.json();
+    list[index] = details;
+    return;
+}

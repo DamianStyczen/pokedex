@@ -1,7 +1,11 @@
 import { PokemonState } from './../store';
 import {
-    FETCH_POKEMON_LIST,
-    FILTER_POKEMON_LIST
+    FETCH_POKEMON_LIST_START,
+    FETCH_POKEMON_LIST_SUCCESS,
+    FETCH_POKEMON_LIST_ERROR,
+    FILTER_POKEMON_LIST_START,
+    FILTER_POKEMON_LIST_SUCCESS,
+    FILTER_POKEMON_LIST_ERROR
 } from '../actions/types';
 
 const initialState: PokemonState = {
@@ -11,14 +15,16 @@ const initialState: PokemonState = {
 
 export default function (state = initialState, action: any) {
     switch (action.type) {
-        case FETCH_POKEMON_LIST:
-            const allData = [...state.list, ...action.list];
+        case FETCH_POKEMON_LIST_SUCCESS:
+            const { list, isContinuation, nextUrl } = action;
+            const newList = isContinuation ? [...state.list, ...list] : list;
+
             return {
                 ...state,
-                list: allData,
-                nextUrl: action.nextUrl
+                list: newList,
+                nextUrl
             }
-        case FILTER_POKEMON_LIST:
+        case FILTER_POKEMON_LIST_SUCCESS:
             return {
                 ...state,
                 list: action.list,
