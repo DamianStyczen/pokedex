@@ -6,11 +6,11 @@ const mapStateToProps = (state: any, props: any) => {
     const id = get(props, 'match.params.id');
     const query = get(props, 'match.params.query');
 
-    const data = query
+    const pokemon = query
         ? get(state, `search.data`, {})
         : get(state, `pokemon.list[${id}]`, {});
 
-    return ({ data });
+    return ({ pokemon });
 }
 
 export default connect(mapStateToProps, null)(Details); 

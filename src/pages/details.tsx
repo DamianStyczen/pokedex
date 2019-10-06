@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Pokemon from '../types/pokemon';
 import Navbar from '../components/navbar';
+import { isEmpty } from 'lodash';
 
 interface DetailsPageProps {
-    data: Pokemon;
+    pokemon: Pokemon;
 }
 
 const StyledWrapper = styled.div`
@@ -15,10 +16,12 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledHeader = styled.h1`
-    background-color: ${({ theme }: any) => theme.colors.primary};
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 50px;
-    text-align: center;
+    background-color: ${({ theme }: any) => theme.colors.primary};
 `;
 
 const ImageWrapper = styled.div`
@@ -46,41 +49,121 @@ const StyledImage = styled.img`
     border-radius: 50%;
 `;
 
-const NameTag = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, .6);
-    position: absolute;
-    bottom: 0;
-    height: 30px;
-    width: 100%;
-    color: white;
-`;
-
 const NameSpan = styled.span`
     text-transform: capitalize;
     margin-left: 10px;
 `;
 
-const DetailsPage = (props: DetailsPageProps) => {
-    const { data } = props;
+const Table = styled.table`
+    border: 1px solid red;
+    width: 100%;
+`;
 
-    if (!data) {
+const TableRow = styled.tr`
+    border: 1px solid red;
+    padding: 0 20px;
+`;
+
+const TableCell = styled.td`
+    width: 33%;
+    padding: 5px 0;
+`;
+
+interface TypeDivProps {
+    theme: any;
+    type: string;
+}
+
+const TypeDiv = styled.span`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 125px;
+    height: 30px;
+    border-radius: 5px;
+    text-transform: capitalize;
+    background-color: ${({ type, theme }: TypeDivProps) => theme.colors[type]};
+`;
+
+const DetailsPage = ({ pokemon }: DetailsPageProps) => {
+    if (isEmpty(pokemon)) {
         return (
-            <h1>No data</h1>
+            <StyledWrapper>
+                <Navbar search goBack />
+                <StyledHeader>
+                    No data has been found. ;(
+                </StyledHeader>
+            </StyledWrapper>
         )
     }
+
+
+    const { id, name, sprites, types, stats } = pokemon;
+    const sprite = sprites.front_default;
+    const parsedTypes = types.map(item => item.type.name);
+    const parsedStats = stats.reduce((acc, item) => {
+        acc[item.stat.name] = item.base_stat;
+
+        return acc;
+    }, {});
+
+    const table = (
+        <Table>
+            <tbody>
+                <TableRow>
+                    <th>Types:</th>
+                    <TableCell><TypeDiv type={parsedTypes[0]}>{parsedTypes[0]}</TypeDiv></TableCell>
+                    <TableCell><TypeDiv type={parsedTypes[1]}>{parsedTypes[1]}</TypeDiv></TableCell>
+                </TableRow>
+                <TableRow>
+                    <th>Stats:</th>
+                    <TableCell>HP:</TableCell>
+                    <TableCell>{parsedStats.hp}</TableCell>
+                </TableRow>
+                <TableRow>
+                    <th></th>
+                    <TableCell>Attack:</TableCell>
+                    <TableCell>{parsedStats.attack}</TableCell>
+                </TableRow>
+                <TableRow>
+                    <th></th>
+                    <TableCell>Defense:</TableCell>
+                    <TableCell>{parsedStats.defense}</TableCell>
+                </TableRow>
+                <TableRow>
+                    <th></th>
+                    <TableCell>Speed:</TableCell>
+                    <TableCell>{parsedStats.speed}</TableCell>
+                </TableRow>
+                <TableRow>
+                    <th></th>
+                    <TableCell>Special Attack:</TableCell>
+                    <TableCell>{parsedStats['special-attack']}</TableCell>
+                </TableRow>
+                <TableRow>
+                    <th></th>
+                    <TableCell>Special Defense:</TableCell>
+                    <TableCell>{parsedStats['special-defense']}</TableCell>
+                </TableRow>
+                <TableRow>
+                    <th></th>
+                    <TableCell>Defense</TableCell>
+                    <TableCell>{parsedStats.defense}</TableCell>
+                </TableRow>
+            </tbody>
+        </Table>
+    )
 
     return (
         <StyledWrapper>
             <Navbar search goBack />
             <ImageWrapper>
-                {data.sprites && <StyledImage src={data.sprites.front_default} alt={data.name} />}
+                {sprite && <StyledImage src={sprite} alt={name} />}
             </ImageWrapper>
             <StyledHeader>
-                {data.name}
+                #{id} <NameSpan>{name}</NameSpan>
             </StyledHeader>
+            {table}
         </StyledWrapper>
     )
 }
