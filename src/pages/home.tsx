@@ -26,8 +26,6 @@ const Loader = styled.div`
 `;
 
 const StyledHero = styled.header`
-  @import url('https://fonts.googleapis.com/css?family=Mansalva&display=swap');
-
   font-family: 'Mansalva', cursive;
   display: flex;
   align-items: center;

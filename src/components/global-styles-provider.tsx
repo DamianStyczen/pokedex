@@ -8,9 +8,17 @@ const GlobalStylesProvider = createGlobalStyle`
     }
 
     body {
-        /* width: 100%; */
+        @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+        @import url('https://fonts.googleapis.com/css?family=Mansalva&display=swap');
+
+
+        font-family: 'Lato', sans-serif;
         max-width: 100vw;
         overflow-x: hidden;
+    }
+
+    input {
+        font-family: 'Lato', sans-serif;
     }
 
     a {
