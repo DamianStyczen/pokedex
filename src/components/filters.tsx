@@ -53,28 +53,7 @@ interface FiltersState {
     showList: boolean;
 }
 
-enum Types { // 18
-    normal = 1,
-    fighting,
-    flying,
-    poison,
-    ground,
-    rock,
-    bug,
-    ghost,
-    steel,
-    fire,
-    water,
-    grass,
-    electric,
-    psychic,
-    ice,
-    dragon,
-    dark,
-    fairy
-}
-
-const types: Array<string> = [
+const types: Array<string> = [ // TODO make it into enum
     'normal',
     'fighting',
     'flying',

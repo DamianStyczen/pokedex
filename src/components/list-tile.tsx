@@ -26,6 +26,27 @@ const Background = styled.div`
     z-index: -1;
 `;
 
+const NameTag = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .6);
+    position: absolute;
+    bottom: 0;
+    height: 30px;
+    width: 100%;
+    color: white;
+`;
+
+const NameSpan = styled.span`
+    text-transform: capitalize;
+    margin-left: 10px;
+`;
+
+const Image = styled.img`
+    margin-bottom: 10px;
+`;
+
 interface BackgroundTileProps {
     theme: any;
     type: string;
@@ -38,11 +59,10 @@ const BackgroundTile = styled.div`
 `;
 
 const ListTile = (props: ListTileProps) => {
-    const { name, types, sprites } = props.pokemon;
+    const { id, name, types, sprites } = props.pokemon;
 
     const parsedTypes = types.map(item => item.type.name);
     const sprite = sprites.front_default;
-    console.log(sprite);
 
     const background = (
         <Background>
@@ -53,7 +73,10 @@ const ListTile = (props: ListTileProps) => {
     return (
         <Tile>
             {background}
-            {sprite && <img src={sprite} alt={name} />}
+            {sprite && <Image src={sprite} alt={name} />}
+            <NameTag>
+                #{id}<NameSpan>{name}</NameSpan>
+            </NameTag>
         </Tile>
     );
 }
