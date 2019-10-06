@@ -17,6 +17,11 @@ const GlobalStylesProvider = createGlobalStyle`
         color: black;
         text-decoration: none;
     }
+
+    button {
+        border: none;
+        box-shadow: none;
+    }
 `;
 
 export default GlobalStylesProvider;
