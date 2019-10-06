@@ -7,10 +7,10 @@ const StyledButton = styled(Button)`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: ${({ theme }) => theme.colors.secondary};
+    background-color: ${({ theme }) => theme.colors.button};
 `;
 const GoBackButton = () => {
-    // @ts-ignore
+    // @ts-ignore - has problem with 'as' property
     return <StyledButton as={Link} to={'/'}>Go back</StyledButton>;
 }
 

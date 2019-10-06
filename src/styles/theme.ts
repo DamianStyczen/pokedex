@@ -5,7 +5,8 @@ const theme = {
         white: 'whitesmoke',
         black: '#000000',
         primary: 'red',
-        secondary: 'buttonface',
+        secondary: 'blue',
+        button: 'buttonface',
         danger: 'tomato',
         loading: 'lightblue',
         ...typeColors
