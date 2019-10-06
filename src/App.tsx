@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import GlobalStylesProvider from './components/global-styles-provider';
-import theme from './styles/theme';
+import defaultTheme from './styles/theme';
 import HomePage from './containers/home';
 import DetailsPage from './containers/details';
 import store from './store';
@@ -26,7 +26,7 @@ const App: React.FC = () => {
     <Provider store={store}>
       <Router>
         <GlobalStylesProvider />
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={defaultTheme}>
           <StyledBody>
             <Layout>
               <Switch>

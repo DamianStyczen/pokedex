@@ -56,7 +56,7 @@ interface BackgroundTileProps {
 const BackgroundTile = styled.div`
     width: 100%;
     height: 100%;
-    background-color: ${({ theme, type }: BackgroundTileProps) => theme.colors[type]};
+    background-color: ${({ theme, type }: BackgroundTileProps) => theme.colors[type].secondary};
 `;
 
 const ListTile = (props: ListTileProps) => {

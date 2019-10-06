@@ -1,6 +1,6 @@
 import typeColors from './types-colors';
 
-const theme = {
+const defaultTheme = {
     colors: {
         white: 'whitesmoke',
         black: '#000000',
@@ -14,6 +14,8 @@ const theme = {
     }
 }
 
+// export const getTheme = (type: string) => {
+//     const theme = typeColors[type];
+// } 
 
-
-export default theme;
+export default defaultTheme;

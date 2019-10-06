@@ -87,7 +87,7 @@ const TypeDiv = styled.span`
     height: 30px;
     border-radius: 5px;
     text-transform: capitalize;
-    background-color: ${({ type, theme }: TypeDivProps) => theme.colors[type]};
+    background-color: ${({ type, theme }: TypeDivProps) => theme.colors[type].primary};
 `;
 
 const DetailsPage = ({ pokemon }: DetailsPageProps) => {

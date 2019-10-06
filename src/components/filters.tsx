@@ -32,7 +32,7 @@ interface StyledFilterButtonProps {
 
 const StyledFilterButton = styled(Button)`
     margin: 5px 15px;
-    background-color: ${({ theme, pokemonType }: StyledFilterButtonProps) => theme.colors[pokemonType]};
+    background-color: ${({ theme, pokemonType }: StyledFilterButtonProps) => theme.colors[pokemonType].secondary};
 `;
 
 const NoFiltersButton = styled(Button)`
