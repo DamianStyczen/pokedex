@@ -14,8 +14,16 @@ const defaultTheme = {
     }
 }
 
-// export const getTheme = (type: string) => {
-//     const theme = typeColors[type];
-// } 
+export const getTheme = (type: string) => {
+    // @ts-ignore
+    const typedTheme = typeColors[type];
+
+    return {
+        colors: {
+            ...defaultTheme.colors,
+            ...typedTheme
+        }
+    }
+}
 
 export default defaultTheme;

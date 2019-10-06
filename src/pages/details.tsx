@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+import { getTheme } from '../styles/theme';
 import Pokemon from '../types/pokemon';
 import Navbar from '../components/navbar';
 import { isEmpty } from 'lodash';
@@ -87,7 +88,7 @@ const TypeDiv = styled.span`
     height: 30px;
     border-radius: 5px;
     text-transform: capitalize;
-    background-color: ${({ type, theme }: TypeDivProps) => theme.colors[type].primary};
+    background-color: ${({ type, theme }: TypeDivProps) => type && theme.colors[type].primary};
 `;
 
 const DetailsPage = ({ pokemon }: DetailsPageProps) => {
@@ -160,16 +161,18 @@ const DetailsPage = ({ pokemon }: DetailsPageProps) => {
     )
 
     return (
-        <StyledWrapper>
-            <Navbar search goBack />
-            <ImageWrapper>
-                {sprite && <StyledImage src={sprite} alt={name} />}
-            </ImageWrapper>
-            <StyledHeader>
-                #{id} <NameSpan>{name}</NameSpan>
-            </StyledHeader>
-            {table}
-        </StyledWrapper>
+        <ThemeProvider theme={getTheme(parsedTypes[0])}>
+            <StyledWrapper>
+                <Navbar search goBack />
+                <ImageWrapper>
+                    {sprite && <StyledImage src={sprite} alt={name} />}
+                </ImageWrapper>
+                <StyledHeader>
+                    #{id} <NameSpan>{name}</NameSpan>
+                </StyledHeader>
+                {table}
+            </StyledWrapper>
+        </ThemeProvider>
     )
 }
 
