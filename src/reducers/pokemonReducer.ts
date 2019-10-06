@@ -10,11 +10,22 @@ import {
 
 const initialState: PokemonState = {
     list: [],
-    nextUrl: ''
+    nextUrl: '',
+    status: ''
 }
 
 export default function (state = initialState, action: any) {
     switch (action.type) {
+        case FETCH_POKEMON_LIST_START:
+            return {
+                ...state,
+                status: 'PROGRESS'
+            }
+        case FETCH_POKEMON_LIST_ERROR:
+            return {
+                ...state,
+                status: 'ERROR'
+            }
         case FETCH_POKEMON_LIST_SUCCESS:
             const { list, isContinuation, nextUrl } = action;
             const newList = isContinuation ? [...state.list, ...list] : list;
@@ -22,13 +33,25 @@ export default function (state = initialState, action: any) {
             return {
                 ...state,
                 list: newList,
-                nextUrl
+                nextUrl,
+                status: 'SUCCESS'
+            }
+        case FILTER_POKEMON_LIST_START:
+            return {
+                ...state,
+                status: 'PROGRESS'
+            }
+        case FILTER_POKEMON_LIST_ERROR:
+            return {
+                ...state,
+                status: 'ERROR'
             }
         case FILTER_POKEMON_LIST_SUCCESS:
             return {
                 ...state,
                 list: action.list,
-                nextUrl: ''
+                nextUrl: '',
+                status: 'SUCCESS'
             }
         default:
             return state;

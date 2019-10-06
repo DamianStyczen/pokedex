@@ -8,8 +8,22 @@ import Filters from '../containers/filters';
 
 interface HomePageProps {
     data: Array<Pokemon>;
+    status: string;
     fetchPokemon: any;
 }
+
+const Loader = styled.div`
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .8);
+    color: white;
+`;
 
 const StyledHero = styled.header`
   display: flex;
@@ -36,15 +50,28 @@ class HomePage extends React.Component<HomePageProps> {
     }
 
     render() {
+        const { status, data } = this.props;
+        const isProgress = status === 'PROGRESS';
+        const isError = status === 'ERROR';
+
+        const showLoader = isProgress || isError;
+
         return (
             <div>
+                {showLoader && (
+                    <Loader>
+                        <h2>
+                            {isError ? 'Something went wrong...' : 'Loading...'}
+                        </h2>
+                    </Loader>
+                )}
                 <StyledHero>
                     <StyledHeader>Pokedex</StyledHeader>
                 </StyledHero>
                 <Filters />
                 <Search />
                 <StyledMain>
-                    <List data={this.props.data} />
+                    <List data={data} />
                     <LoadMoreButton />
                 </StyledMain>
             </div>

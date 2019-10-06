@@ -7,7 +7,6 @@ import {
     SEARCH_SUCCESS,
     SEARCH_ERROR
 } from './types';
-import Pokemon from '../types/pokemon';
 import { Dispatch } from 'redux';
 
 export const searchStart = (query: string) => async (dispatch: Dispatch) => {
