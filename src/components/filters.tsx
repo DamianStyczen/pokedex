@@ -11,6 +11,7 @@ const StyledListWrapper = styled.div`
     top: 0;
     left: 0;
     background: rgba(0, 0, 0, .8);
+    z-index: 99;
 
 `;
 
@@ -23,14 +24,22 @@ const StyledList = styled.ul`
     list-style: none;
 `;
 
-const StyledListButton = styled.button`
+const StyledButton = styled.button`
     width: 125px;
     height: 40px;
     margin: 5px 15px;
     border-radius: 20px;
 `;
 
-const NoFiltersButton = styled(StyledListButton)`
+interface StyledFilterButtonProps {
+    theme: any;
+    pokemonType: string;
+}
+
+const StyledFilterButton = styled(StyledButton)`
+    background-color: ${({ theme, pokemonType }: StyledFilterButtonProps) => theme.colors[pokemonType]};
+`;
+const NoFiltersButton = styled(StyledButton)`
     width: 280px;
     background-color: tomato;
 `;
@@ -115,9 +124,9 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
                     </li>
                     {types.map(type => (
                         <li key={type}>
-                            <StyledListButton data-type={type} onClick={() => this.handleFilterClick(type)}>
+                            <StyledFilterButton pokemonType={type} onClick={() => this.handleFilterClick(type)}>
                                 {type}
-                            </StyledListButton>
+                            </StyledFilterButton>
                         </li>
                     ))}
                 </StyledList>

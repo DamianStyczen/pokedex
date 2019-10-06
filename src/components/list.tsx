@@ -2,12 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Pokemon from '../types/pokemon';
+import ListTile from './list-tile';
+import { get } from 'lodash';
 
 interface ListProps {
     data: Array<Pokemon>
 }
 
 const StyledList = styled.ol`
+    width: 100%;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
@@ -15,13 +18,18 @@ const StyledList = styled.ol`
     justify-content: center;
 `;
 
+interface StyledListItemProps {
+    type: string,
+    theme: any
+}
+
 const StyledListItem = styled.li`
     width: 140px;
     height: 140px;
     text-align: center;
-    border: 1px solid black;
     margin: 5px;
     text-transform: capitalize;
+    background: ${ ({ theme, type }: StyledListItemProps) => theme.colors[type]};
 `;
 
 const StyledLink = styled(Link)`
@@ -33,23 +41,30 @@ const StyledLink = styled(Link)`
 const List = (props: ListProps) => {
     const { data } = props;
     const output = data && data.map((item, i) => {
+        const types = item.types.map(item => item.type.name);
+
+        // return (
+        //     <li key={i}>
+        //         <StyledLink to={`/details/${i}`} >
+        //             {item.sprites && <img src={item.sprites.front_default} alt={item.name} />}
+        //             {item.id}. {item.name}
+        //         </StyledLink>
+        //     </li>
+        // );
+
         return (
-            <StyledListItem key={i}>
+            <li key={i}>
                 <StyledLink to={`/details/${i}`} >
-                    {item.sprites && <img src={item.sprites.front_default} alt={item.name} />}
-                    {item.id}. {item.name}
+                    <ListTile pokemon={item} />
                 </StyledLink>
-            </StyledListItem>
-        );
+            </li>
+        )
     })
 
     return (
-        <div>
-            <StyledList>
-                {output}
-            </StyledList>
-
-        </div>
+        <StyledList>
+            {output}
+        </StyledList>
     );
 }
 

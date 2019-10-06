@@ -13,6 +13,13 @@ const StyledWrapper = styled.div`
     align-items: center;
 `;
 
+const StyledHeader = styled.h1`
+    background-color: grey;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+`;
+
 const StyledImage = styled.img`
     width: 384px;
     height: 384px;
@@ -23,6 +30,7 @@ const StyledLink = styled(Link)`
 
 const DetailsPage = (props: DetailsPageProps) => {
     const { data } = props;
+    console.log(data);
 
     if (!data) {
         return (
@@ -34,7 +42,9 @@ const DetailsPage = (props: DetailsPageProps) => {
         <StyledWrapper>
             <StyledLink to='/' >Go back</StyledLink>
             {data.sprites && <StyledImage src={data.sprites.front_default} alt={data.name} />}
-            <h1>{data.name}</h1>
+            <StyledHeader>
+                {data.name}
+            </StyledHeader>
         </StyledWrapper>
     )
 }

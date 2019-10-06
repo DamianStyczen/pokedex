@@ -23,6 +23,7 @@ const Loader = styled.div`
     left: 0;
     background-color: rgba(0, 0, 0, .8);
     color: white;
+    z-index: 99;
 `;
 
 const StyledHero = styled.header`
