@@ -25,7 +25,7 @@ const StyledList = styled.ul`
 
 const StyledListButton = styled.button`
     width: 125px;
-    height: 50px;
+    height: 40px;
     margin: 5px 15px;
     border-radius: 20px;
 `;

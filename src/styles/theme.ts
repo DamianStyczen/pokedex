@@ -1,9 +1,15 @@
+import colors from './colors';
+
 const theme = {
     colors: {
-        white: '#ffffff',
+        white: 'whitesmoke',
         black: '#000000',
-        primary: 'red'
+        primary: 'red',
+        ...colors
+
     }
 }
+
+
 
 export default theme;

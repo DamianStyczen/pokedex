@@ -19,7 +19,7 @@ export const fetchPokemon = (nextUrl?: string) => async (dispatch: Dispatch) => 
     });
 
     try {
-        const response = await fetch(nextUrl || 'https://pokeapi.co/api/v2/pokemon');
+        const response = await fetch(nextUrl || 'https://pokeapi.co/api/v2/pokemon?limit=40');
         const data = await response.json();
         const { results: list, next } = data;
 
@@ -50,7 +50,7 @@ export const filterPokemon = (filter: string) => async (dispatch: Dispatch) => {
     });
 
     try {
-        const response = await fetch(`https://pokeapi.co/api/v2/type/${filter}`);
+        const response = await fetch(`https://pokeapi.co/api/v2/type/${filter}?limit=40`);
         const data = await response.json();
         const { pokemon } = data;
         const list = pokemon.map((item: any) => item.pokemon);
