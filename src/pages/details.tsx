@@ -37,7 +37,7 @@ const DetailsPage = (props: DetailsPageProps) => {
 
     return (
         <StyledWrapper>
-            <Navbar title search goBack />
+            <Navbar search goBack />
             {data.sprites && <StyledImage src={data.sprites.front_default} alt={data.name} />}
             <StyledHeader>
                 {data.name}

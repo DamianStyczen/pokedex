@@ -5,12 +5,18 @@ import Button from './button';
 
 interface MessageBoxProps {
     isError: boolean;
-    isProgress: boolean
+    isProgress: boolean;
+    theme: any;
 }
 const MessageBox = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     width: 100%;
-    background: ${(props: MessageBoxProps) => props.isError ? 'tomato' : 'lightblue'};
+    height: 30px;
+    background: ${({ isError, theme }: MessageBoxProps) => isError ? theme.colors.danger : theme.colors.loading};
+    border-radius: 5px;
 `;
 
 const Form = styled.form`

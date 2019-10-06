@@ -1,4 +1,4 @@
-import colors from './colors';
+import typeColors from './types-colors';
 
 const theme = {
     colors: {
@@ -6,7 +6,9 @@ const theme = {
         black: '#000000',
         primary: 'red',
         secondary: 'buttonface',
-        ...colors
+        danger: 'tomato',
+        loading: 'lightblue',
+        ...typeColors
 
     }
 }
