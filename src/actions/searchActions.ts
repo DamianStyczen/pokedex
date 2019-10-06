@@ -1,8 +1,4 @@
 import {
-    getDataFromLocalStorage,
-    saveDataToLocalStorage
-} from './../utils/local-storage';
-import {
     SEARCH_START,
     SEARCH_SUCCESS,
     SEARCH_ERROR

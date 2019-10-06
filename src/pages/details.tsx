@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Pokemon from '../types/pokemon';
-import { Link } from 'react-router-dom';
 import Navbar from '../components/navbar';
 
 interface DetailsPageProps {

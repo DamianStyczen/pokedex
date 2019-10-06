@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import Pokemon from '../types/pokemon';
-import { get } from 'lodash';
 
 interface ListTileProps {
     pokemon: Pokemon;
@@ -68,7 +66,7 @@ const ListTile = (props: ListTileProps) => {
 
     const background = (
         <Background>
-            {parsedTypes.map((type: string) => <BackgroundTile type={type} />)}
+            {parsedTypes.map((type: string) => <BackgroundTile key={type} type={type} />)}
         </Background>
     )
 

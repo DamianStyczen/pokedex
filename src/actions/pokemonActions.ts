@@ -1,8 +1,4 @@
 import {
-    getDataFromLocalStorage,
-    saveDataToLocalStorage
-} from './../utils/local-storage';
-import {
     FETCH_POKEMON_LIST_START,
     FETCH_POKEMON_LIST_SUCCESS,
     FETCH_POKEMON_LIST_ERROR,

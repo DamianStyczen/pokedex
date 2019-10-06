@@ -33,6 +33,7 @@ const Input = styled.input`
     border-radius: 5px;
     border: none;
     text-indent: 5px;
+    padding-right: 60px;
 `;
 
 const InputButton = styled(Button)`
