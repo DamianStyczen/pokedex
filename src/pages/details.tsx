@@ -13,6 +13,7 @@ const StyledWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     background: ${({ theme }: any) => theme.colors.white};
+    border-radius: 5px;
 `;
 
 const StyledHeader = styled.h1`
@@ -55,16 +56,20 @@ const NameSpan = styled.span`
 `;
 
 const Table = styled.table`
-    border: 1px solid red;
     width: 100%;
+    margin: 0 auto;
 `;
 
 const TableRow = styled.tr`
-    border: 1px solid red;
     padding: 0 20px;
 `;
 
 const TableCell = styled.td`
+    width: 33%;
+    padding: 5px 0;
+`;
+
+const TableHeader = styled.th`
     width: 33%;
     padding: 5px 0;
 `;
@@ -111,37 +116,37 @@ const DetailsPage = ({ pokemon }: DetailsPageProps) => {
         <Table>
             <tbody>
                 <TableRow>
-                    <th>Types:</th>
+                    <TableHeader>Types:</TableHeader>
                     <TableCell><TypeDiv type={parsedTypes[0]}>{parsedTypes[0]}</TypeDiv></TableCell>
                     <TableCell><TypeDiv type={parsedTypes[1]}>{parsedTypes[1]}</TypeDiv></TableCell>
                 </TableRow>
                 <TableRow>
-                    <th>Stats:</th>
+                    <TableHeader>Stats:</TableHeader>
                     <TableCell>HP:</TableCell>
                     <TableCell>{parsedStats.hp}</TableCell>
                 </TableRow>
                 <TableRow>
-                    <th></th>
+                    <TableHeader />
                     <TableCell>Attack:</TableCell>
                     <TableCell>{parsedStats.attack}</TableCell>
                 </TableRow>
                 <TableRow>
-                    <th></th>
+                    <TableHeader />
                     <TableCell>Defense:</TableCell>
                     <TableCell>{parsedStats.defense}</TableCell>
                 </TableRow>
                 <TableRow>
-                    <th></th>
+                    <TableHeader />
                     <TableCell>Speed:</TableCell>
                     <TableCell>{parsedStats.speed}</TableCell>
                 </TableRow>
                 <TableRow>
-                    <th></th>
+                    <TableHeader />
                     <TableCell>Special Attack:</TableCell>
                     <TableCell>{parsedStats['special-attack']}</TableCell>
                 </TableRow>
                 <TableRow>
-                    <th></th>
+                    <TableHeader />
                     <TableCell>Special Defense:</TableCell>
                     <TableCell>{parsedStats['special-defense']}</TableCell>
                 </TableRow>

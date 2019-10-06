@@ -25,6 +25,10 @@ const Loader = styled.div`
     z-index: 99;
 `;
 
+const StyledWrapper = styled.div`
+    padding-bottom: 30px;
+`;
+
 const StyledHero = styled.header`
   font-family: 'Mansalva', cursive;
   display: flex;
@@ -66,7 +70,7 @@ class HomePage extends React.Component<HomePageProps> {
         const showLoader = isProgress || isError;
 
         return (
-            <div>
+            <StyledWrapper>
                 {showLoader && (
                     <Loader>
                         <h2>
@@ -83,7 +87,7 @@ class HomePage extends React.Component<HomePageProps> {
                     <List data={data} />
                     <LoadMoreButton />
                 </StyledMain>
-            </div>
+            </StyledWrapper>
         );
     }
 }

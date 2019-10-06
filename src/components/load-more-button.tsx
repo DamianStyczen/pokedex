@@ -9,6 +9,7 @@ interface LoadMoreButtonProps {
 
 const StyledButton = styled(Button)`
     margin: 20px;
+    background-color: ${({ theme }: any) => theme.colors.secondary};
 `;
 
 const LoadMoreButton = (props: LoadMoreButtonProps) => {
