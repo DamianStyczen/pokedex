@@ -26,14 +26,23 @@ const Loader = styled.div`
 `;
 
 const StyledHero = styled.header`
+  @import url('https://fonts.googleapis.com/css?family=Mansalva&display=swap');
+
+  font-family: 'Mansalva', cursive;
   display: flex;
   align-items: center;
+  flex-direction: column;
   height: 200px;
 `;
 
 const StyledHeader = styled.h1`
   text-align: center;
   width: 100%;
+  font-size: 6em;
+`;
+
+const StyledSignature = styled.p`
+    margin-left: 30%;
 `;
 
 const StyledMain = styled.main`
@@ -67,6 +76,7 @@ class HomePage extends React.Component<HomePageProps> {
                 )}
                 <StyledHero>
                     <StyledHeader>Pokedex</StyledHeader>
+                    <StyledSignature>by Damian Styczen</StyledSignature>
                 </StyledHero>
                 <Navbar filters search />
                 <StyledMain>
