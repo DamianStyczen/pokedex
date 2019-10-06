@@ -10,25 +10,26 @@ import {
 import Pokemon from '../types/pokemon';
 import { Dispatch } from 'redux';
 
-export const searchStart = (query: string) => (dispatch: Dispatch) => {
+export const searchStart = (query: string) => async (dispatch: Dispatch) => {
     dispatch({
         type: SEARCH_START,
         query
     });
 
-    fetch(`https://pokeapi.co/api/v2/pokemon/${query}`)
-        .then(res => res.json())
-        .then((data) => {
-            dispatch({
-                type: SEARCH_SUCCESS,
-                data,
-                query
-            })
-        })
-        .catch(error => {
-            dispatch({
-                type: SEARCH_ERROR,
-                query
-            })
-        })
+    try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`)
+        const data = await response.json();
+
+        dispatch({
+            type: SEARCH_SUCCESS,
+            data,
+            query
+        });
+
+    } catch {
+        dispatch({
+            type: SEARCH_ERROR,
+            query
+        });
+    }
 }
