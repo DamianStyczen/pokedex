@@ -42,7 +42,7 @@ const ImageWrapper = styled.div`
         width: 192px;
         height: 96px;
         background: rgba(0, 0, 0, .2);
-        bottom: 0px;
+        bottom: 10px;
         left: calc(50% - 96px);
         border-radius: 50%;
         z-index: -1;
