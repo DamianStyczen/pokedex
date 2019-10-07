@@ -8,6 +8,7 @@ interface NavbarProps {
     filters?: boolean;
     search?: boolean;
     goBack?: boolean;
+    title?: boolean;
 }
 
 interface NavProps {

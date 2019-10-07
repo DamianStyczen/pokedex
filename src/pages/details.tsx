@@ -1,12 +1,12 @@
 import React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import { getTheme } from '../styles/theme';
+import styled from 'styled-components';
 import Pokemon from '../types/pokemon';
 import Navbar from '../components/navbar';
 import { isEmpty } from 'lodash';
 
 interface DetailsPageProps {
     pokemon: Pokemon;
+    changeTheme: any;
 }
 
 const StyledWrapper = styled.div`
@@ -27,9 +27,13 @@ const StyledHeader = styled.h1`
 `;
 
 const ImageWrapper = styled.div`
+    display: flex;
+    justify-content: center;
     position: relative;
+    width: 100%;
     z-index: 1;
-    margin-bottom: 10px;
+    padding-bottom: 10px;
+    background-color: ${({ theme }: any) => theme.colors.secondary};
 
     ::before {
         content: '';
@@ -91,89 +95,104 @@ const TypeDiv = styled.span`
     background-color: ${({ type, theme }: TypeDivProps) => type && theme.colors[type].primary};
 `;
 
-const DetailsPage = ({ pokemon }: DetailsPageProps) => {
-    if (isEmpty(pokemon)) {
-        return (
-            <StyledWrapper>
-                <Navbar search goBack />
-                <StyledHeader>
-                    No data has been found. ;(
-                </StyledHeader>
-            </StyledWrapper>
-        )
+class DetailsPage extends React.Component<DetailsPageProps>{
+    componentDidMount() {
+        const { pokemon, changeTheme } = this.props;
+
+        if (isEmpty(pokemon)) {
+            return;
+        }
+
+        const { types } = pokemon;
+        const parsedTypes = types.map(item => item.type.name);
+
+        changeTheme(parsedTypes[0]);
     }
 
+    render() {
+        const { pokemon } = this.props;
+        if (isEmpty(pokemon)) {
+            return (
+                <StyledWrapper>
+                    <Navbar search goBack />
+                    <StyledHeader>
+                        No data has been found. ;(
+                    </StyledHeader>
+                </StyledWrapper>
+            )
+        }
 
-    const { id, name, sprites, types, stats } = pokemon;
-    const sprite = sprites.front_default;
-    const parsedTypes = types.map(item => item.type.name);
-    const parsedStats = stats.reduce((acc, item) => {
-        acc[item.stat.name] = item.base_stat;
 
-        return acc;
-    }, {});
+        const { id, name, sprites, types, stats } = pokemon;
+        const sprite = sprites.front_default;
+        const parsedTypes = types.map(item => item.type.name);
+        const parsedStats = stats.reduce((acc, item) => {
+            acc[item.stat.name] = item.base_stat;
 
-    const table = (
-        <Table>
-            <tbody>
-                <TableRow>
-                    <TableHeader>Types:</TableHeader>
-                    <TableCell><TypeDiv type={parsedTypes[0]}>{parsedTypes[0]}</TypeDiv></TableCell>
-                    <TableCell><TypeDiv type={parsedTypes[1]}>{parsedTypes[1]}</TypeDiv></TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableHeader>Stats:</TableHeader>
-                    <TableCell>HP:</TableCell>
-                    <TableCell>{parsedStats.hp}</TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableHeader />
-                    <TableCell>Attack:</TableCell>
-                    <TableCell>{parsedStats.attack}</TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableHeader />
-                    <TableCell>Defense:</TableCell>
-                    <TableCell>{parsedStats.defense}</TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableHeader />
-                    <TableCell>Speed:</TableCell>
-                    <TableCell>{parsedStats.speed}</TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableHeader />
-                    <TableCell>Special Attack:</TableCell>
-                    <TableCell>{parsedStats['special-attack']}</TableCell>
-                </TableRow>
-                <TableRow>
-                    <TableHeader />
-                    <TableCell>Special Defense:</TableCell>
-                    <TableCell>{parsedStats['special-defense']}</TableCell>
-                </TableRow>
-                <TableRow>
-                    <th></th>
-                    <TableCell>Defense</TableCell>
-                    <TableCell>{parsedStats.defense}</TableCell>
-                </TableRow>
-            </tbody>
-        </Table>
-    )
+            return acc;
+        }, {});
 
-    return (
-        <ThemeProvider theme={getTheme(parsedTypes[0])}>
+        // TODO Move to separate file
+        const table = (
+            <Table>
+                <tbody>
+                    <TableRow>
+                        <TableHeader>Types:</TableHeader>
+                        <TableCell><TypeDiv type={parsedTypes[0]}>{parsedTypes[0]}</TypeDiv></TableCell>
+                        <TableCell><TypeDiv type={parsedTypes[1]}>{parsedTypes[1]}</TypeDiv></TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableHeader>Stats:</TableHeader>
+                        <TableCell>Hitpoints:</TableCell>
+                        <TableCell>{parsedStats.hp}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableHeader />
+                        <TableCell>Attack:</TableCell>
+                        <TableCell>{parsedStats.attack}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableHeader />
+                        <TableCell>Defense:</TableCell>
+                        <TableCell>{parsedStats.defense}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableHeader />
+                        <TableCell>Speed:</TableCell>
+                        <TableCell>{parsedStats.speed}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableHeader />
+                        <TableCell>Special Attack:</TableCell>
+                        <TableCell>{parsedStats['special-attack']}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableHeader />
+                        <TableCell>Special Defense:</TableCell>
+                        <TableCell>{parsedStats['special-defense']}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <th></th>
+                        <TableCell>Defense</TableCell>
+                        <TableCell>{parsedStats.defense}</TableCell>
+                    </TableRow>
+                </tbody>
+            </Table>
+        )
+
+        return (
             <StyledWrapper>
-                <Navbar search goBack />
-                <ImageWrapper>
-                    {sprite && <StyledImage src={sprite} alt={name} />}
-                </ImageWrapper>
                 <StyledHeader>
                     #{id} <NameSpan>{name}</NameSpan>
                 </StyledHeader>
+                <ImageWrapper>
+                    {sprite && <StyledImage src={sprite} alt={name} />}
+                </ImageWrapper>
+                <Navbar search goBack />
                 {table}
             </StyledWrapper>
-        </ThemeProvider>
-    )
+        )
+    }
 }
 
 export default DetailsPage;

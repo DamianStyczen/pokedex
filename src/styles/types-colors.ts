@@ -9,7 +9,7 @@ export default {
     },
     flying: {
         primary: '#A890F0',
-        secondary: '#A890F0'
+        secondary: '#C6B7F5'
     },
     poison: {
         primary: '#A040A0',
@@ -44,8 +44,8 @@ export default {
         secondary: '#9DB7F5'
     },
     grass: {
-        primary: '#A7DB8D',
-        secondary: '#78C850'
+        primary: '#78C850',
+        secondary: '#A7DB8D'
     },
     electric: {
         primary: '#F8D030',
