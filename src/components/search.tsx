@@ -17,6 +17,7 @@ const MessageBox = styled.div`
     height: 30px;
     background: ${({ isError, theme }: MessageBoxProps) => isError ? theme.colors.danger : theme.colors.loading};
     border-radius: 5px;
+    z-index: 1;
 `;
 
 const Form = styled.form`
